@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Elif & Mert — Düğün Sitesi</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+:root{--cream:#fdf6ee;--rose:#c9788a;--gold:#c9a96e;--dark:#1a1008;--soft:#f7ede2;}
+html{scroll-behavior:smooth;}
+body{background:var(--cream);color:var(--dark);font-family:'Inter',sans-serif;overflow-x:hidden;}
+
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:1rem 6%;display:flex;align-items:center;justify-content:space-between;background:rgba(253,246,238,.92);backdrop-filter:blur(12px);border-bottom:1px solid rgba(201,168,110,.2);}
+.nl{font-family:'Playfair Display',serif;font-size:1.1rem;color:var(--rose);font-style:italic;}
+.nr{display:flex;gap:1.8rem;}
+.nr a{color:var(--dark);text-decoration:none;font-size:.82rem;font-weight:500;opacity:.7;transition:opacity .2s;}
+.nr a:hover{opacity:1;}
+.ham{display:none;flex-direction:column;gap:5px;cursor:pointer;}
+.ham span{display:block;width:22px;height:2px;background:var(--dark);border-radius:2px;}
+.mob-nav{display:none;position:fixed;top:58px;left:0;right:0;background:var(--cream);border-bottom:1px solid rgba(201,168,110,.2);z-index:99;padding:1.5rem 6%;flex-direction:column;gap:1rem;}
+.mob-nav.open{display:flex;}
+.mob-nav a{color:var(--dark);text-decoration:none;font-size:1rem;font-weight:500;padding:.5rem 0;border-bottom:1px solid rgba(201,168,110,.15);}
+
+/* HERO */
+#hero{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:7rem 6% 4rem;background:linear-gradient(180deg,#fdf6ee 0%,#f7ede2 100%);position:relative;overflow:hidden;}
+.hero-deco{position:absolute;opacity:.07;font-size:20rem;top:50%;left:50%;transform:translate(-50%,-50%);pointer-events:none;user-select:none;}
+.hero-tag{font-size:.72rem;font-weight:600;letter-spacing:.25em;text-transform:uppercase;color:var(--gold);margin-bottom:1.5rem;}
+h1{font-family:'Playfair Display',serif;font-size:clamp(3rem,8vw,6.5rem);font-weight:400;line-height:1;color:var(--dark);margin-bottom:.5rem;}
+h1 em{color:var(--rose);font-style:italic;}
+.hero-date{font-size:.9rem;color:var(--gold);font-weight:500;letter-spacing:.15em;margin-bottom:3rem;}
+/* COUNTDOWN */
+.countdown{display:flex;gap:1.5rem;justify-content:center;flex-wrap:wrap;margin-bottom:3rem;}
+.cd-item{text-align:center;background:#fff;border:1px solid rgba(201,168,110,.25);border-radius:16px;padding:1.5rem 2rem;min-width:90px;box-shadow:0 4px 24px rgba(201,120,138,.08);}
+.cd-num{font-family:'Playfair Display',serif;font-size:2.8rem;font-weight:700;color:var(--rose);line-height:1;display:block;}
+.cd-lbl{font-size:.65rem;font-weight:600;letter-spacing:.15em;text-transform:uppercase;color:var(--gold);margin-top:.4rem;}
+.cd-married{background:linear-gradient(135deg,var(--rose),var(--gold));border:none;color:#fff;}
+.cd-married .cd-num{color:#fff;}
+.cd-married .cd-lbl{color:rgba(255,255,255,.75);}
+.hero-sub{font-size:1rem;color:rgba(26,16,8,.55);max-width:480px;line-height:1.8;}
+.btn-rose{display:inline-block;margin-top:2rem;padding:.85rem 2.5rem;background:var(--rose);color:#fff;text-decoration:none;border-radius:999px;font-size:.88rem;font-weight:600;letter-spacing:.05em;transition:all .25s;}
+.btn-rose:hover{background:var(--dark);transform:translateY(-2px);}
+
+/* DIVIDER */
+.divider{text-align:center;padding:2.5rem 0;font-size:1.8rem;color:var(--gold);opacity:.5;}
+
+/* STORY */
+#story{padding:7rem 6%;background:#fff;}
+.sec-tag{font-size:.7rem;font-weight:700;letter-spacing:.25em;text-transform:uppercase;color:var(--gold);display:block;margin-bottom:.8rem;}
+.sec-h2{font-family:'Playfair Display',serif;font-size:clamp(2rem,4vw,3rem);color:var(--dark);margin-bottom:1rem;}
+.story-grid{display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:center;max-width:1100px;margin:3rem auto 0;}
+.story-img{border-radius:20px;overflow:hidden;aspect-ratio:4/5;position:relative;}
+.story-img img{width:100%;height:100%;object-fit:cover;}
+.story-img::after{content:'';position:absolute;inset:0;background:linear-gradient(to bottom,transparent 50%,rgba(201,120,138,.2));}
+.story-text .sq{width:40px;height:3px;background:var(--rose);margin-bottom:1.5rem;}
+.story-text p{color:rgba(26,16,8,.65);line-height:1.9;font-size:.95rem;margin-bottom:1rem;}
+.story-badge{display:inline-block;padding:.5rem 1.2rem;background:var(--soft);border:1px solid rgba(201,168,110,.3);border-radius:999px;font-size:.78rem;color:var(--gold);font-weight:600;margin-top:.5rem;}
+
+/* TIMELINE */
+#timeline{padding:7rem 6%;background:var(--soft);}
+.tl-wrap{max-width:700px;margin:3rem auto 0;position:relative;}
+.tl-line{position:absolute;left:50%;top:0;bottom:0;width:1px;background:rgba(201,168,110,.3);transform:translateX(-50%);}
+.tl-item{display:flex;gap:2rem;margin-bottom:3rem;align-items:flex-start;}
+.tl-item:nth-child(odd){flex-direction:row-reverse;}
+.tl-item:nth-child(odd) .tl-box{text-align:right;}
+.tl-dot{width:14px;height:14px;border-radius:50%;background:var(--rose);flex-shrink:0;margin-top:.3rem;position:relative;z-index:1;box-shadow:0 0 0 4px rgba(201,120,138,.2);}
+.tl-box{flex:1;}
+.tl-year{font-size:.7rem;font-weight:700;letter-spacing:.15em;color:var(--gold);text-transform:uppercase;margin-bottom:.3rem;}
+.tl-title{font-family:'Playfair Display',serif;font-size:1.15rem;color:var(--dark);margin-bottom:.3rem;}
+.tl-desc{font-size:.85rem;color:rgba(26,16,8,.55);line-height:1.7;}
+
+/* GALLERY */
+#galeri{padding:7rem 6%;background:#fff;}
+.gallery-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;margin-top:3rem;}
+.gal-item{border-radius:14px;overflow:hidden;aspect-ratio:1;cursor:pointer;position:relative;}
+.gal-item.tall{grid-row:span 2;aspect-ratio:auto;}
+.gal-item img{width:100%;height:100%;object-fit:cover;transition:transform .5s;}
+.gal-item:hover img{transform:scale(1.06);}
+.gal-overlay{position:absolute;inset:0;background:rgba(201,120,138,0);transition:background .3s;display:flex;align-items:center;justify-content:center;}
+.gal-item:hover .gal-overlay{background:rgba(201,120,138,.2);}
+.gal-icon{color:#fff;font-size:1.5rem;opacity:0;transition:opacity .3s;}
+.gal-item:hover .gal-icon{opacity:1;}
+
+/* LIGHTBOX */
+.lb{display:none;position:fixed;inset:0;background:rgba(0,0,0,.9);z-index:999;align-items:center;justify-content:center;}
+.lb.open{display:flex;}
+.lb img{max-width:90vw;max-height:90vh;border-radius:12px;object-fit:contain;}
+.lb-close{position:absolute;top:1.5rem;right:1.5rem;color:#fff;font-size:2rem;cursor:pointer;background:none;border:none;line-height:1;}
+
+/* MESAJ */
+#mesajlar{padding:7rem 6%;background:var(--soft);}
+.msg-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:1.5rem;margin-top:3rem;}
+.msg-card{background:#fff;border:1px solid rgba(201,168,110,.2);border-radius:16px;padding:2rem;position:relative;}
+.msg-card::before{content:'"';font-family:'Playfair Display',serif;font-size:4rem;color:var(--rose);opacity:.15;position:absolute;top:.5rem;left:1.2rem;line-height:1;}
+.msg-text{font-size:.9rem;color:rgba(26,16,8,.7);line-height:1.8;margin-bottom:1rem;font-style:italic;}
+.msg-name{font-size:.78rem;font-weight:700;color:var(--rose);letter-spacing:.1em;}
+.msg-date{font-size:.7rem;color:var(--gold);margin-top:.2rem;}
+
+/* PANEL */
+#panel{padding:7rem 6%;background:var(--dark);}
+.panel-inner{max-width:700px;margin:0 auto;text-align:center;}
+.panel-inner .sec-tag{color:var(--gold);}
+.panel-inner .sec-h2{color:#fff;}
+.panel-inner p{color:rgba(255,255,255,.5);font-size:.95rem;line-height:1.8;margin-bottom:2.5rem;}
+.panel-form{background:rgba(255,255,255,.04);border:1px solid rgba(201,168,110,.2);border-radius:20px;padding:2.5rem;text-align:left;margin-top:2rem;}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-bottom:1rem;}
+label{display:block;font-size:.75rem;font-weight:600;color:rgba(255,255,255,.4);letter-spacing:.1em;text-transform:uppercase;margin-bottom:.4rem;}
+input,textarea,select{width:100%;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);border-radius:10px;padding:.85rem 1rem;color:#fff;font-family:'Inter',sans-serif;font-size:.9rem;outline:none;transition:border .2s;}
+input:focus,textarea:focus,select:focus{border-color:rgba(201,120,138,.6);}
+input::placeholder,textarea::placeholder{color:rgba(255,255,255,.2);}
+textarea{height:100px;resize:vertical;}
+.form-btn{width:100%;background:linear-gradient(135deg,var(--rose),var(--gold));color:#fff;border:none;border-radius:10px;padding:1rem;font-family:'Inter',sans-serif;font-weight:700;font-size:.95rem;cursor:pointer;margin-top:1rem;transition:opacity .2s;}
+.form-btn:hover{opacity:.88;}
+.form-note{font-size:.75rem;color:rgba(255,255,255,.3);text-align:center;margin-top:1rem;}
+
+/* CTA */
+#davet{padding:7rem 6%;background:var(--soft);text-align:center;}
+.davet-inner{max-width:600px;margin:0 auto;}
+.davet-inner .sec-h2{font-size:clamp(2rem,4vw,3.2rem);}
+.davet-inner p{color:rgba(26,16,8,.55);font-size:1rem;line-height:1.8;margin:1rem 0 2rem;}
+.btn-outline-rose{display:inline-block;padding:.85rem 2.5rem;border:2px solid var(--rose);color:var(--rose);text-decoration:none;border-radius:999px;font-size:.88rem;font-weight:600;margin:.4rem;transition:all .25s;}
+.btn-outline-rose:hover{background:var(--rose);color:#fff;}
+
+/* FOOTER */
+footer{padding:3rem 6%;background:var(--dark);text-align:center;}
+footer .fl{font-family:'Playfair Display',serif;font-size:1.4rem;color:var(--rose);font-style:italic;margin-bottom:.5rem;}
+footer p{font-size:.78rem;color:rgba(255,255,255,.25);}
+
+/* MOBILE */
+@media(max-width:768px){
+  .story-grid{grid-template-columns:1fr;gap:2rem;}
+  .gallery-grid{grid-template-columns:repeat(2,1fr);}
+  .gal-item.tall{grid-row:span 1;aspect-ratio:1;}
+  .msg-grid{grid-template-columns:1fr;}
+  .form-row{grid-template-columns:1fr;}
+  .tl-item,.tl-item:nth-child(odd){flex-direction:column;align-items:flex-start;}
+  .tl-item:nth-child(odd) .tl-box{text-align:left;}
+  .tl-line{display:none;}
+  .countdown{gap:.8rem;}
+  .cd-item{padding:1rem 1.2rem;min-width:70px;}
+  .cd-num{font-size:2rem;}
+  .nr{display:none;}
+  .ham{display:flex;}
+}
+@media(max-width:480px){
+  .gallery-grid{grid-template-columns:1fr 1fr;}
+  .cd-item{min-width:60px;padding:.9rem .8rem;}
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nl">Elif & Mert</div>
+  <div class="nr">
+    <a href="#story">Hikayemiz</a>
+    <a href="#galeri">Galeri</a>
+    <a href="#mesajlar">Mesajlar</a>
+    <a href="#panel">Yönetim</a>
+    <a href="#davet">Davet</a>
+  </div>
+  <div class="ham" onclick="document.getElementById('mn').classList.toggle('open')">
+    <span></span><span></span><span></span>
+  </div>
+</nav>
+<div class="mob-nav" id="mn">
+  <a href="#story" onclick="document.getElementById('mn').classList.remove('open')">Hikayemiz</a>
+  <a href="#galeri" onclick="document.getElementById('mn').classList.remove('open')">Galeri</a>
+  <a href="#mesajlar" onclick="document.getElementById('mn').classList.remove('open')">Mesajlar</a>
+  <a href="#panel" onclick="document.getElementById('mn').classList.remove('open')">Yönetim Paneli</a>
+  <a href="#davet" onclick="document.getElementById('mn').classList.remove('open')">Davet</a>
+</div>
+
+<section id="hero">
+  <div class="hero-deco">&#10084;</div>
+  <div class="hero-tag">Bir Ömür Boyu</div>
+  <h1>Elif <em>&</em> Mert</h1>
+  <div class="hero-date">15 Eylül 2025 — Bodrum, Muğla</div>
+  <div class="countdown" id="countdown"></div>
+  <p class="hero-sub">Birlikte geçirdiğimiz her anı, her gülüşü ve her anımızı bu sayfada sizinle paylaşmak istedik.</p>
+  <a href="#galeri" class="btn-rose">Fotoğraflara Göz At</a>
+</section>
+
+<div class="divider">— &#10024; —</div>
+
+<section id="story">
+  <div style="max-width:1100px;margin:0 auto;">
+    <span class="sec-tag">Nasıl başladı?</span>
+    <h2 class="sec-h2">Bizim Hikayemiz</h2>
+    <div class="story-grid">
+      <div class="story-img">
+        <img src="https://images.unsplash.com/photo-1583939003579-730e3918a45a?w=600&q=80" alt="Elif ve Mert">
+      </div>
+      <div class="story-text">
+        <div class="sq"></div>
+        <p>Her şey 2019 yılında bir ortak arkadaşın doğum günü partisinde başladı. İlk bakışta değil, ilk konuşmada anlayıverdik birbirimizi. O gece saatlerce konuştu, güldük, hayallerimizi paylaştık.</p>
+        <p>2021'de Kapadokya'da nişanlandık, balonun içinde güneş doğarken. O anı hiç unutmayacağım diyen Elif, şimdi bu siteyi açan sen olabilirsin — hoş geldin!</p>
+        <p>Beş yılda biriktirdiğimiz her anımız bu sayfada. Fotoğraflar, videolar ve misafirlerimizin mesajları burada yaşamaya devam edecek.</p>
+        <span class="story-badge">&#10084; Birlikte 5 yıl</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider">— &#10024; —</div>
+
+<section id="timeline">
+  <div style="text-align:center;margin-bottom:1rem;">
+    <span class="sec-tag">Yolculuğumuz</span>
+    <h2 class="sec-h2">Önemli Anlarımız</h2>
+  </div>
+  <div class="tl-wrap">
+    <div class="tl-line"></div>
+    <div class="tl-item">
+      <div class="tl-dot"></div>
+      <div class="tl-box">
+        <div class="tl-year">Haziran 2019</div>
+        <div class="tl-title">İlk Tanışma</div>
+        <div class="tl-desc">Ortak arkadaşımız Selin'in doğum günü partisinde tanıştık. Saatlerce sohbet ettik.</div>
+      </div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-dot"></div>
+      <div class="tl-box">
+        <div class="tl-year">Ağustos 2019</div>
+        <div class="tl-title">İlk Buluşma</div>
+        <div class="tl-desc">Kadıköy'de küçük bir kafede ilk resmi buluşmamız. O günden beri hep birlikteyiz.</div>
+      </div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-dot"></div>
+      <div class="tl-box">
+        <div class="tl-year">Nisan 2021</div>
+        <div class="tl-title">Kapadokya'da Nişan</div>
+        <div class="tl-desc">Balon turunda güneş doğarken evlenme teklifi. Evet dedi tabii ki!</div>
+      </div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-dot"></div>
+      <div class="tl-box">
+        <div class="tl-year">Mart 2023</div>
+        <div class="tl-title">Yuvamız</div>
+        <div class="tl-desc">Beşiktaş'ta ilk evimize taşındık. Kutlama pastasını kendimiz yaptık.</div>
+      </div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-dot" style="background:var(--gold);box-shadow:0 0 0 4px rgba(201,168,110,.25);"></div>
+      <div class="tl-box">
+        <div class="tl-year" style="color:var(--rose);">15 Eylül 2025</div>
+        <div class="tl-title" style="font-size:1.3rem;color:var(--rose);">Düğün Gunu</div>
+        <div class="tl-desc">Bodrum Mandarin Oriental'de en yakın sevdiklerimizle... Yeni bir bölümün ilk sayfası.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider">— &#10024; —</div>
+
+<section id="galeri">
+  <div style="max-width:1100px;margin:0 auto;">
+    <span class="sec-tag">Fotoğraf Albümü</span>
+    <h2 class="sec-h2">Anılarımız</h2>
+    <p style="color:rgba(26,16,8,.5);font-size:.9rem;margin-top:.5rem;">Yönetim panelinden istediğiniz zaman yeni fotoğraf ekleyebilirsiniz.</p>
+    <div class="gallery-grid">
+      <div class="gal-item tall" onclick="openLB(this)">
+        <img src="https://images.unsplash.com/photo-1519741497674-611481863552?w=600&q=80" alt="Galeri">
+        <div class="gal-overlay"><span class="gal-icon">+</span></div>
+      </div>
+      <div class="gal-item" onclick="openLB(this)">
+        <img src="https://images.unsplash.com/photo-1511285560929-80b456fea0bc?w=600&q=80" alt="Galeri">
+        <div class="gal-overlay"><span class="gal-icon">+</span></div>
+      </div>
+      <div class="gal-item" onclick="openLB(this)">
+        <img src="https://images.unsplash.com/photo-1465495976277-4387d4b0b4c6?w=600&q=80" alt="Galeri">
+        <div class="gal-overlay"><span class="gal-icon">+</span></div>
+      </div>
+      <div class="gal-item" onclick="openLB(this)">
+        <img src="https://images.unsplash.com/photo-1606216794074-735e91aa2c92?w=600&q=80" alt="Galeri">
+        <div class="gal-overlay"><span class="gal-icon">+</span></div>
+      </div>
+      <div class="gal-item" onclick="openLB(this)">
+        <img src="https://images.unsplash.com/photo-1583939003579-730e3918a45a?w=600&q=80" alt="Galeri">
+        <div class="gal-overlay"><span class="gal-icon">+</span></div>
+      </div>
+      <div class="gal-item" onclick="openLB(this)">
+        <img src="https://images.unsplash.com/photo-1529636444744-adffc9135a5e?w=600&q=80" alt="Galeri">
+        <div class="gal-overlay"><span class="gal-icon">+</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- LIGHTBOX -->
+<div class="lb" id="lb" onclick="closeLB()">
+  <button class="lb-close" onclick="closeLB()">&times;</button>
+  <img id="lb-img" src="" alt="">
+</div>
+
+<div class="divider">— &#10024; —</div>
+
+<section id="mesajlar">
+  <div style="max-width:1100px;margin:0 auto;">
+    <span class="sec-tag">Sevgi Dolu Mesajlar</span>
+    <h2 class="sec-h2">Misafirlerimizden</h2>
+    <div class="msg-grid">
+      <div class="msg-card">
+        <p class="msg-text">Çiftimiz için en güzel dileklerimi sunuyorum. Ömür boyu mutluluklar, Elif ve Mert! Sizi tanımak hayatımın en güzel hediyelerinden biri.</p>
+        <div class="msg-name">Selin K.</div>
+        <div class="msg-date">17 Eylül 2025</div>
+      </div>
+      <div class="msg-card">
+        <p class="msg-text">Bu mutlu günde yanınızda olabilmek bizim için büyük bir onurdu. Yeni hayatınızda her gün daha da güzelleşsin. Sevgilerle!</p>
+        <div class="msg-name">Ahmet & Zeynep B.</div>
+        <div class="msg-date">16 Eylül 2025</div>
+      </div>
+      <div class="msg-card">
+        <p class="msg-text">İkinizi de ayrı ayrı tanıdım ama birlikte gördüğümde anladım: Bu evlilik, tam olması gereken bir şey. Çok mutlu olacaksınız.</p>
+        <div class="msg-name">Can M.</div>
+        <div class="msg-date">15 Eylül 2025</div>
+      </div>
+      <div class="msg-card" style="border:2px solid rgba(201,168,110,.3);background:var(--soft);">
+        <p class="msg-text" style="font-style:normal;color:rgba(26,16,8,.4);font-size:.85rem;">Siz de mesajınızı bırakabilirsiniz. Yönetim panelinden tüm mesajlar görüntülenir ve yayınlanır.</p>
+        <div class="msg-name" style="color:var(--gold);">+ Mesaj Bırak</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider">— &#10024; —</div>
+
+<section id="panel">
+  <div class="panel-inner">
+    <span class="sec-tag">Sadece Sizin İçin</span>
+    <h2 class="sec-h2" style="color:#fff;">Yönetim Paneli</h2>
+    <p>Teknik bilgiye gerek yok. Telefonunuzdan ya da bilgisayarınızdan kolayca fotoğraf ekleyin, mesajları yönetin, bilgileri güncelleyin.</p>
+    <div style="display:flex;gap:1rem;flex-wrap:wrap;justify-content:center;margin-bottom:2rem;">
+      <div style="background:rgba(255,255,255,.05);border:1px solid rgba(201,168,110,.2);border-radius:12px;padding:1.2rem 1.8rem;text-align:center;min-width:140px;">
+        <div style="font-size:1.8rem;margin-bottom:.5rem;">&#128247;</div>
+        <div style="font-size:.8rem;color:rgba(255,255,255,.5);">Fotoğraf Ekle</div>
+      </div>
+      <div style="background:rgba(255,255,255,.05);border:1px solid rgba(201,168,110,.2);border-radius:12px;padding:1.2rem 1.8rem;text-align:center;min-width:140px;">
+        <div style="font-size:1.8rem;margin-bottom:.5rem;">&#128172;</div>
+        <div style="font-size:.8rem;color:rgba(255,255,255,.5);">Mesajları Yönet</div>
+      </div>
+      <div style="background:rgba(255,255,255,.05);border:1px solid rgba(201,168,110,.2);border-radius:12px;padding:1.2rem 1.8rem;text-align:center;min-width:140px;">
+        <div style="font-size:1.8rem;margin-bottom:.5rem;">&#128197;</div>
+        <div style="font-size:.8rem;color:rgba(255,255,255,.5);">Tarihleri Düzenle</div>
+      </div>
+      <div style="background:rgba(255,255,255,.05);border:1px solid rgba(201,168,110,.2);border-radius:12px;padding:1.2rem 1.8rem;text-align:center;min-width:140px;">
+        <div style="font-size:1.8rem;margin-bottom:.5rem;">&#128279;</div>
+        <div style="font-size:.8rem;color:rgba(255,255,255,.5);">Bağlantı Paylaş</div>
+      </div>
+    </div>
+    <div class="panel-form">
+      <p style="color:rgba(255,255,255,.35);font-size:.82rem;margin-bottom:1.5rem;text-align:center;">&#128274; Demo Panel Girişi</p>
+      <div class="form-row">
+        <div><label>Kullanıcı Adı</label><input type="text" placeholder="elif.mert2025" value="elif.mert2025"></div>
+        <div><label>Şifre</label><input type="password" placeholder="••••••••" value="12345678"></div>
+      </div>
+      <label>Yeni Fotoğraf Başlığı</label>
+      <input type="text" placeholder="Kapadokya Tatilimiz — Nisan 2024" style="margin-bottom:1rem;">
+      <label>Açıklama</label>
+      <textarea placeholder="Bu fotoğraf hakkında kısa bir not..."></textarea>
+      <button class="form-btn" onclick="panelDemo()">&#128247; Fotoğraf Ekle (Demo)</button>
+      <p class="form-note">Demo amaçlı — gerçek projede WordPress veya özel panel kurulur.</p>
+    </div>
+  </div>
+</section>
+
+<div class="divider" style="background:var(--dark);color:var(--gold);margin:0;padding:2.5rem 0;">— &#10024; —</div>
+
+<section id="davet">
+  <div class="davet-inner">
+    <span class="sec-tag">Bu Siteyi İster misiniz?</span>
+    <h2 class="sec-h2">Kendi Düğün Sitenizi Yaptıralım</h2>
+    <p>Geri sayım, fotoğraf galerisi, misafir mesaj sistemi ve kolay yönetim paneliyle — anahtar teslim düğün sitesi. Domain + hosting rehberliği dahil.</p>
+    <a href="https://www.bionluk.com" target="_blank" class="btn-rose">Teklif İste</a>
+    <a href="#galeri" class="btn-outline-rose">Galeriyi Gör</a>
+  </div>
+</section>
+
+<footer>
+  <div class="fl">Elif & Mert — 15 Eylül 2025</div>
+  <p style="margin-top:.5rem;">Demo site — juniorusaa.github.io</p>
+</footer>
+
+<script>
+// COUNTDOWN
+function updateCountdown(){
+  const wedding = new Date('2025-09-15T18:00:00');
+  const now = new Date();
+  const diff = wedding - now;
+  const el = document.getElementById('countdown');
+  if(!el) return;
+
+  if(diff <= 0){
+    // Evliyiz!
+    const days = Math.floor((now - wedding) / 86400000);
+    el.innerHTML = `
+      <div class="cd-item cd-married"><span class="cd-num">${days}</span><span class="cd-lbl">Birlikte Gun</span></div>
+      <div class="cd-item cd-married"><span class="cd-num">&#10084;</span><span class="cd-lbl">Evliyiz!</span></div>
+    `;
+    return;
+  }
+
+  const d = Math.floor(diff / 86400000);
+  const h = Math.floor((diff % 86400000) / 3600000);
+  const m = Math.floor((diff % 3600000) / 60000);
+  const s = Math.floor((diff % 60000) / 1000);
+
+  el.innerHTML = `
+    <div class="cd-item"><span class="cd-num" id="cd-d">${d}</span><span class="cd-lbl">Gun</span></div>
+    <div class="cd-item"><span class="cd-num" id="cd-h">${String(h).padStart(2,'0')}</span><span class="cd-lbl">Saat</span></div>
+    <div class="cd-item"><span class="cd-num" id="cd-m">${String(m).padStart(2,'0')}</span><span class="cd-lbl">Dakika</span></div>
+    <div class="cd-item"><span class="cd-num" id="cd-s">${String(s).padStart(2,'0')}</span><span class="cd-lbl">Saniye</span></div>
+  `;
+}
+updateCountdown();
+setInterval(updateCountdown, 1000);
+
+// LIGHTBOX
+function openLB(el){
+  const img = el.querySelector('img');
+  document.getElementById('lb-img').src = img.src;
+  document.getElementById('lb').classList.add('open');
+}
+function closeLB(){document.getElementById('lb').classList.remove('open');}
+
+// PANEL DEMO
+function panelDemo(){
+  alert('Demo paneli! Gercek projede WordPress veya ozel panel ile telefononuzdan kolayca fotograf ekleyebilirsiniz.');
+}
+</script>
+</body>
+</html>
